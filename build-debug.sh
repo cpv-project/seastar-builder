@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
-# break after command error
 set -e
-
-# build seastar static and dynamic library
-# use single core because it require so much memory (require atleast 3.5G for per core)
+COMMON_DIR=$(realpath ./common)
 cd ../seastar
 if [ ! -f build-debug.ninja ]; then
 	./configure.py --mode=debug --with libseastar.a --with seastar.pc
+	sh $COMMON_DIR/replace_flags.sh
 	mv build.ninja build-debug.ninja
-	sed -i "s/cxxflags =/cxxflags = -fPIC/g" build-debug.ninja
-	sed -i "s/CARES_STATIC=ON/CARES_STATIC=ON -DCARES_STATIC_PIC=ON/g" build-debug.ninja
 fi
+# use single core because it require so much memory (require atleast 3.5G for per core)
 ninja -j1 -f ./build-debug.ninja
 cd ./build/debug
-g++ -shared -o seastar.so $(pkg-config --libs seastar.pc)
+sh $COMMON_DIR/build_dynamic.sh
 

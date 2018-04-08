@@ -1,11 +1,13 @@
 # Scripts used to build seastar static and dynamic library
 
-How to use:
+Build steps:
 
 ``` text
 git clone --recurse-submodules https://github.com/scylladb/seastar
 git clone https://github.com/cpv-project/seastar-builder
-cd seastar-builder
+cd seastar
+sh install-dependencies.sh
+cd ../seastar-builder
 sh build-debug.sh # or build-release.sh
 ```
 
