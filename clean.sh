@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-cd ../seastar
-rm -fv build*.ninja
+rm -rfv build-pkg
+cd ./seastar
 rm -rfv build
 

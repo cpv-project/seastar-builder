@@ -1,9 +1,9 @@
 Package: seastar
-Version: 18.04-1
+Version: _VERSION
 Section: misc
 Priority: optional
 Architecture: amd64
-Depends: ragel, libhwloc-dev, libnuma-dev, libpciaccess-dev, libcrypto++-dev, libboost-all-dev, libxml2-dev, xfslibs-dev, libgnutls28-dev, liblz4-dev, libsctp-dev, libprotobuf-dev, protobuf-compiler, libunwind8-dev, systemtap-sdt-dev
+Depends: ragel, libhwloc-dev, libnuma-dev, libpciaccess-dev, libcrypto++-dev, libboost-all-dev, libxml2-dev, xfslibs-dev, libgnutls28-dev, liblz4-dev, libsctp-dev, libprotobuf-dev, protobuf-compiler, libunwind-dev, systemtap-sdt-dev
 Maintainer: 303248153 <303248153@qq.com>
 Description: High performance server-side application framework
 
