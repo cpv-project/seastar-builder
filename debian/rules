@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+SRCDIR = $(shell realpath .)/seastar
+ROOTDIR = $(shell realpath .)/debian/tmp
+
+build-indep:
+build-arch:
+	cd $(SRCDIR); sh ../debian/scripts/before_configure.sh
+	cd $(SRCDIR); sh ../debian/scripts/build_seastar.sh
+build: build-indep build-arch
+
+binary-indep:
+binary-arch:
+	mkdir -p $(ROOTDIR)/DEBIAN
+	cd $(ROOTDIR); SRCDIR=$(SRCDIR) ROOTDIR=$(ROOTDIR) sh ../scripts/install_seastar.sh
+	dpkg-gencontrol -pseastar
+	dpkg --build $(ROOTDIR) ..
+binary: binary-indep binary-arch
+
+clean:
+	rm -rf $(ROOTDIR)
+
+.PHONY: build-indep build-arch build binary-indep binary-arch binary clean
+
