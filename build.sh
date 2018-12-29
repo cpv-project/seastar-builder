@@ -11,8 +11,8 @@ fi
 
 mkdir -p ${BUILDDIR}
 cd ${BUILDDIR}
-cp -r ../../debian .
-cp -r ../../seastar .
+cp -rf ../../debian .
+cp -rf ../../seastar .
 
 if [ "${TYPE}" = "local" ]; then
 	debuild
