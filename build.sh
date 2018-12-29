@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-VERSION=$(cat ./debian/changelog | head -n 1 | python3 -c "import re;print(re.search('\((.+)\)', input()).groups()[0])")
+VERSION=$(sh ./debian/scripts/get_version.sh)
 BUILDDIR=build/seastar-${VERSION}
 TYPE=$1
 
