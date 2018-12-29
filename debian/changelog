@@ -1,3 +1,9 @@
+seastar (20181230.1) bionic; urgency=low
+
+  * include debug build as seastar-debug for sanitizer support
+
+ -- compiv <compiv@tutanota.com>  Sat, 29 Dec 2018 23:38:31 +0000
+
 seastar (20181223.5) bionic; urgency=low
 
   * build from seastar 85f7e61a488e7d217b7d4aa5dfb954b55f915f0d

@@ -12,11 +12,17 @@ set -e
 python3 configure.py --disable-hwloc --prefix=/usr \
 	--cflags="-ftls-model=initial-exec -fPIC -fvisibility=default" \
 	--mode release --without-tests --without-apps --without-demos
+python3 configure.py --disable-hwloc --prefix=/usr \
+	--cflags="-ftls-model=initial-exec -fPIC -fvisibility=default" \
+	--mode debug --without-tests --without-apps --without-demos
 
 # cpu cores:
 #	use single core here, because the memory usage is high
 #	(3.5G * cores)
 
 cd ./build/release
+ninja -j1 -f ./build.ninja
+
+cd ../../build/debug
 ninja -j1 -f ./build.ninja
 

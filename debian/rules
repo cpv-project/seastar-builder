@@ -2,6 +2,7 @@
 
 SRCDIR = $(shell realpath .)/seastar
 ROOTDIR = $(shell realpath .)/debian/tmp
+ROOTDIR_DEBUG = $(shell realpath .)/debian/tmp_debug
 
 build-indep:
 build-arch:
@@ -12,13 +13,16 @@ build: build-indep build-arch
 binary-indep:
 binary-arch:
 	mkdir -p $(ROOTDIR)/DEBIAN
-	cd $(ROOTDIR); SRCDIR=$(SRCDIR) ROOTDIR=$(ROOTDIR) sh ../scripts/install_seastar.sh
+	mkdir -p $(ROOTDIR_DEBUG)
+	cd $(ROOTDIR); \
+		SRCDIR=$(SRCDIR) ROOTDIR=$(ROOTDIR) ROOTDIR_DEBUG=$(ROOTDIR_DEBUG) \
+		sh ../scripts/install_seastar.sh
 	dpkg-gencontrol -pseastar
 	dpkg --build $(ROOTDIR) ..
 binary: binary-indep binary-arch
 
 clean:
-	rm -rf $(ROOTDIR)
+	rm -rf $(ROOTDIR) $(ROOTDIR_DEBUG)
 
 .PHONY: build-indep build-arch build binary-indep binary-arch binary clean
 
