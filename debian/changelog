@@ -1,3 +1,9 @@
+seastar (20181230.2) bionic; urgency=low
+
+  * fix random segment fault error when connect with posix stack
+
+ -- compiv <compiv@tutanota.com>  Sun, 30 Dec 2018 06:01:22 +0000
+
 seastar (20181230.1) bionic; urgency=low
 
   * include debug build as seastar-debug for sanitizer support

@@ -13,6 +13,7 @@ mkdir -p ${BUILDDIR}
 cd ${BUILDDIR}
 cp -rf ../../debian .
 cp -rf ../../seastar .
+cat ../../patches/*.patch | patch -p1 -d seastar
 
 if [ "${TYPE}" = "local" ]; then
 	debuild
