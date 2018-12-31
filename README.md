@@ -1,5 +1,8 @@
 # Scripts used to build seastar shared library and package for ubuntu
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7b0c2c57cca44b4682a7afb51d179f82)](https://www.codacy.com/app/compiv/seastar-builder?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cpv-project/seastar-builder&amp;utm_campaign=Badge_Grade)
+[![license](https://img.shields.io/github/license/cpv-project/seastar-builder.svg)]()
+
 ### Install from ubuntu ppa (for users)
 
 Supported version: 18.04 (bionic)
