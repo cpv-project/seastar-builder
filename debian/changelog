@@ -1,3 +1,9 @@
+seastar (20190113.1) bionic; urgency=low
+
+  * build from seastar c2762e949d584ae4da452fb9ce4f449dcd700f85
+
+ -- compiv <compiv@tutanota.com>  Sun, 13 Jan 2019 09:35:55 +0000
+
 seastar (20181230.2) bionic; urgency=low
 
   * fix random segment fault error when connect with posix stack
