@@ -7,6 +7,7 @@ TYPE=$1
 
 if [ ! -d seastar ]; then
 	git clone --recurse-submodules https://github.com/cpv-project/seastar
+	git clone https://github.com/fmtlib/fmt seastar/fmt
 fi
 
 mkdir -p ${BUILDDIR}

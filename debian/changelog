@@ -1,3 +1,10 @@
+seastar (20190626.1) bionic; urgency=low
+
+  * build from seastar b629d5ef7a26215bb3b598f98a956fa8192696da
+  * add libfmt-dev as dependency
+
+ -- compiv <compiv@tutanota.com>  Wed, 26 Jun 2019 06:39:45 +0000
+
 seastar (20190113.1) bionic; urgency=low
 
   * build from seastar c2762e949d584ae4da452fb9ce4f449dcd700f85

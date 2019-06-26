@@ -1,0 +1,23 @@
+--- a/include/seastar/core/iostream-impl.hh
++++ b/include/seastar/core/iostream-impl.hh
+@@ -37,7 +37,7 @@ inline future<temporary_buffer<char>> data_source_impl::skip(uint64_t n)
+             return get().then([&] (temporary_buffer<char> buffer) -> compat::optional<temporary_buffer<char>> {
+                 if (buffer.size() >= n) {
+                     buffer.trim_front(n);
+-                    return buffer;
++                    return compat::optional<temporary_buffer<char>>(std::move(buffer));
+                 }
+                 n -= buffer.size();
+                 return { };
+--- a/include/seastar/net/tcp.hh
++++ b/include/seastar/net/tcp.hh
+@@ -2089,7 +2089,7 @@ compat::optional<typename InetTraits::l4packet> tcp<InetTraits>::tcb::get_packet
+         // Finally - we can't send more until window is opened again.
+         output();
+     }
+-    return p;
++    return compat::optional<typename InetTraits::l4packet>(std::move(p));
+ }
+
+ template <typename InetTraits>
+

@@ -8,8 +8,8 @@ Build-Depends:
  libcrypto++-dev, libboost-all-dev, libxml2-dev, xfslibs-dev,
  libgnutls28-dev, liblz4-dev, libsctp-dev, gcc, make,
  libprotobuf-dev, protobuf-compiler, python3, systemtap-sdt-dev,
- libtool, cmake, libyaml-cpp-dev, libc-ares-dev, stow, g++-5,
- libubsan1, libasan5
+ libtool, cmake, libyaml-cpp-dev, libc-ares-dev, stow,
+ libubsan1, libasan5, g++-9
 Homepage: https://github.com/scylladb/seastar
 
 Package: seastar
@@ -19,7 +19,7 @@ Depends:
  libcrypto++-dev, libboost-all-dev, libxml2-dev, xfslibs-dev,
  libgnutls28-dev, liblz4-dev, libsctp-dev, gcc, make,
  libprotobuf-dev, protobuf-compiler, python3, systemtap-sdt-dev,
- libtool, cmake, libyaml-cpp-dev, libc-ares-dev, stow, g++-5,
+ libtool, cmake, libyaml-cpp-dev, libc-ares-dev, stow,
  libubsan1, libasan5
 Description: High performance server-side application framework
 

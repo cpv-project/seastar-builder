@@ -11,10 +11,15 @@ set -e
 
 python3 configure.py --disable-hwloc --prefix=/usr \
 	--cflags="-ftls-model=initial-exec -fPIC -fvisibility=default" \
-	--mode release --without-tests --without-apps --without-demos
+	--optflags="-O3 -march=atom -mtune=skylake" \
+	--ldflags="-flto -fuse-ld=gold" \
+	--mode release --without-tests --without-apps --without-demos --cook fmt \
+	--c-compiler gcc-9 --compiler g++-9
+
 python3 configure.py --disable-hwloc --prefix=/usr \
 	--cflags="-ftls-model=initial-exec -fPIC -fvisibility=default" \
-	--mode debug --without-tests --without-apps --without-demos
+	--mode debug --without-tests --without-apps --without-demos --cook fmt \
+	--c-compiler gcc-9 --compiler g++-9
 
 # cpu cores:
 #	use single core here, because the memory usage is high

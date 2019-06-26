@@ -18,7 +18,7 @@ sudo apt-get install seastar
 
 ``` text
 cd examples
-g++ $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seastar)
+g++ $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seastar) -O3
 # why use epoll backend:
 #	because aio is not allowed inside container (EPERM)
 ./a.out --reactor-backend epoll
@@ -36,7 +36,15 @@ g++ $(pkg-config --cflags seastar-debug) tcp_echo_server.cpp $(pkg-config --libs
 
 ### Build local package (for advance users)
 
+Although gcc-7 is the minimal requirement (I added some patch to make seastar support it),<br/>
+gcc-9 is recommend for performance and future updates.<br/>
+If you want to use gcc-7, search `gcc-9` and `g++-9` in this project and replace them.
+
+(Why not use environment variable to switch gcc version: I can't pass them to ppa)
+
 ``` text
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+sudo apt-get install g++-9
 sh build.sh local
 ```
 
@@ -56,5 +64,5 @@ dput ppa:username/project seastar_version_source.changes
 # License
 
 LICENSE: MIT LICENSE<br/>
-Copyright © 2018 303248153@github<br/>
+Copyright © 2018-2019 303248153@github<br/>
 If you have any license issue please contact 303248153@qq.com.
