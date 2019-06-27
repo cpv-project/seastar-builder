@@ -10,8 +10,7 @@ set -e
 #	but the library will no longer support dlopen
 
 python3 configure.py --disable-hwloc --prefix=/usr \
-	--cflags="-ftls-model=initial-exec -fPIC -fvisibility=default" \
-	--optflags="-O3 -march=atom -mtune=skylake" \
+	--cflags="-ftls-model=initial-exec -fPIC -fvisibility=default -O3" \
 	--ldflags="-flto -fuse-ld=gold" \
 	--mode release --without-tests --without-apps --without-demos --cook fmt \
 	--c-compiler gcc-9 --compiler g++-9

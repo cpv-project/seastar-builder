@@ -1,3 +1,10 @@
+seastar (20190627.1) bionic; urgency=low
+
+  * build from seastar 45ac30887e160e9e730ca2da67b16a0362782c1e
+  * remove march and mtune option (vps doesn't support much extensions)
+
+ -- compiv <compiv@tutanota.com>  Thu, 27 Jun 2019 01:18:36 +0000
+
 seastar (20190626.1) bionic; urgency=low
 
   * build from seastar b629d5ef7a26215bb3b598f98a956fa8192696da
