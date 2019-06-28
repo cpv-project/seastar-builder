@@ -19,9 +19,7 @@ sudo apt-get install seastar
 ``` text
 cd examples
 g++ $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seastar) -O3
-# why use epoll backend:
-#	because aio is not allowed inside container (EPERM)
-./a.out --reactor-backend epoll
+./a.out
 ```
 
 ### Compile and execute example program in debug mode with sanitizers (for users)
@@ -29,9 +27,7 @@ g++ $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seast
 ``` text
 cd examples
 g++ $(pkg-config --cflags seastar-debug) tcp_echo_server.cpp $(pkg-config --libs seastar-debug)
-# why use epoll backend:
-#	because aio is not allowed inside container (EPERM)
-./a.out --reactor-backend epoll
+./a.out
 ```
 
 ### Build local package (for advance users)
