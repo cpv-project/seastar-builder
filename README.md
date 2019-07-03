@@ -54,6 +54,10 @@ cd build
 dput ppa:username/project seastar_version_source.changes
 ```
 
+### Performance tips
+
+Because seastar implements custom task scheduler, the performance compare to other framework maybe lower on low end machine, one solution is set higher value of `--task-quota-ms` option, like `--task-quota-ms=20`, this solution has increase throughput by 35% on my vps. Of cause there will be some penalty, see [this discussion](https://groups.google.com/forum/#!topic/seastar-dev/igjSoMRQupo) for more details.
+
 ### Links
 
 - [PPA](https://launchpad.net/~compiv/+archive/ubuntu/cpv-project)
