@@ -14,11 +14,19 @@ sudo apt-get update
 sudo apt-get install seastar
 ```
 
+In addition, you have to install gcc-9 because the package is built with it.<br/>
+(Why use gcc-9: seastar won't support old compiler for long period, and I don't want to add patches for old compiler)
+
+``` text
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+sudo apt-get install g++-9
+```
+
 ### Compile and execute example program (for users)
 
 ``` text
 cd examples
-g++ $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seastar) -O3
+g++-9 $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seastar) -O3
 ./a.out
 ```
 
@@ -26,21 +34,15 @@ g++ $(pkg-config --cflags seastar) tcp_echo_server.cpp $(pkg-config --libs seast
 
 ``` text
 cd examples
-g++ $(pkg-config --cflags seastar-debug) tcp_echo_server.cpp $(pkg-config --libs seastar-debug)
+g++-9 $(pkg-config --cflags seastar-debug) tcp_echo_server.cpp $(pkg-config --libs seastar-debug)
 ./a.out
 ```
 
 ### Build local package (for advance users)
 
-Although gcc-7 is the minimal requirement (I added some patch to make seastar support it),<br/>
-gcc-9 is recommend for performance and future updates.<br/>
-If you want to use gcc-7, search `gcc-9` and `g++-9` in this project and replace them.
-
-(Why not use environment variable to switch gcc version: I can't pass them to ppa)
+To build this package, gcc-9 is required, see install steps above.
 
 ``` text
-sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-sudo apt-get install g++-9
 sh build.sh local
 ```
 
