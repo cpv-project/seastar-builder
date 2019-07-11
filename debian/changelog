@@ -1,3 +1,10 @@
+seastar (20190711.1) bionic; urgency=low
+
+  * build from seastar c1f20796002571a1de59f5e9ed2aebe7461bfe39
+  * remove patches for gcc 7 (upstream fixed it)
+
+ -- compiv <compiv@tutanota.com>  Thu, 11 Jul 2019 19:07:11 +0000
+
 seastar (20190627.1) bionic; urgency=low
 
   * build from seastar 45ac30887e160e9e730ca2da67b16a0362782c1e
