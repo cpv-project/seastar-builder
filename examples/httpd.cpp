@@ -1,3 +1,4 @@
+#include <seastar/core/prometheus.hh>
 #include <seastar/http/httpd.hh>
 #include <seastar/http/handlers.hh>
 #include <seastar/http/function_handlers.hh>
@@ -43,6 +44,9 @@ int main(int ac, char** av) {
             return server->set_routes([rb](routes& r){rb->set_api_doc(r);});
         }).then([server, rb]{
             return server->set_routes([rb](routes& r) {rb->register_function(r, "demo", "hello world application");});
+        }).then([server, rb] {
+            prometheus::config ctx;
+            return prometheus::start(*server, ctx);
         }).then([server, port] {
             return server->listen(port);
         }).then([server, port] {
