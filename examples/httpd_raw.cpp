@@ -51,24 +51,57 @@ hell9
 						}
 					});
 				}).then([&out, &a] {
-					std::cout << "close connection from: " << a << std::endl;
+					// std::cout << "close connection from: " << a << std::endl;
 					return out.close();
 				});
 			});
 	}
 	
+	void on_accepted(seastar::connected_socket s, seastar::socket_address a) {
+		thread_local static int count = 0;
+		++count;
+		if (count % 100 == 0) {
+			std::cout << "accepted " << count << " connections" << std::endl;
+		}
+		// std::cout << "accepted connection from: " << a << std::endl;
+		seastar::schedule(seastar::make_task([s=std::move(s), a=std::move(a)] () mutable {
+			handle_connection(std::move(s), std::move(a)).discard_result();
+		}));
+	}
+	
 	seastar::future<> service_loop() {
 		seastar::listen_options lo;
 		lo.reuse_address = true;
+		lo.listen_backlog = 65535;
+		thread_local static auto last_started_accept = std::chrono::steady_clock::now();
 		return seastar::do_with(
 			seastar::listen(seastar::make_ipv4_address({port}), lo),
 			[] (auto& listener) {
 				return seastar::keep_doing([&listener] () {
-					return listener.accept().then(
-						[] (seastar::connected_socket s, seastar::socket_address a) {
-							std::cout << "accepted connection from: " << a << std::endl;
-							handle_connection(std::move(s), std::move(a));
-						});
+					auto now = std::chrono::steady_clock::now();
+					auto delta = (now - last_started_accept) / std::chrono::milliseconds(1);
+					last_started_accept = now;
+					if (delta > 1000) {
+						std::cout << "started accept loop since " << delta << "ms after last time" << std::endl;
+					}
+					thread_local std::size_t count_once_max = 0;
+					std::size_t count_once = 0;
+					while (true) {
+						auto f = listener.accept();
+						if (f.available()) {
+							++count_once;
+							f.then(&on_accepted);
+						} else {
+							if (count_once > count_once_max) {
+								count_once_max = count_once;
+							}
+							if (count_once > 10) {
+								std::cout << "accepted " << count_once << " connections at once (max: " <<
+						       			count_once_max << ")" << std::endl;
+							}
+							return f.then(&on_accepted);
+						}
+					}
 				});
 			});
 	}
