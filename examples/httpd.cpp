@@ -38,7 +38,7 @@ int main(int ac, char** av) {
         uint16_t port = config["port"].as<uint16_t>();
         auto server = new http_server_control();
         auto rb = make_shared<api_registry_builder>("apps/httpd/");
-        server->start().then([server] {
+        return server->start().then([server] {
             return server->set_routes(set_routes);
         }).then([server, rb]{
             return server->set_routes([rb](routes& r){rb->set_api_doc(r);});
@@ -48,7 +48,10 @@ int main(int ac, char** av) {
             prometheus::config ctx;
             return prometheus::start(*server, ctx);
         }).then([server, port] {
-            return server->listen(port);
+            seastar::listen_options lo;
+            lo.reuse_address = true;
+            lo.listen_backlog = 65535;
+            return server->listen(port, lo);
         }).then([server, port] {
             std::cout << "Seastar HTTP server listening on port " << port << " ...\n";
             engine().at_exit([server] {

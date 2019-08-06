@@ -65,7 +65,7 @@ hell9
 		}
 		// std::cout << "accepted connection from: " << a << std::endl;
 		seastar::schedule(seastar::make_task([s=std::move(s), a=std::move(a)] () mutable {
-			handle_connection(std::move(s), std::move(a)).discard_result();
+			(void)handle_connection(std::move(s), std::move(a));
 		}));
 	}
 	
@@ -90,7 +90,7 @@ hell9
 						auto f = listener.accept();
 						if (f.available()) {
 							++count_once;
-							f.then(&on_accepted);
+							(void)f.then(&on_accepted);
 						} else {
 							if (count_once > count_once_max) {
 								count_once_max = count_once;

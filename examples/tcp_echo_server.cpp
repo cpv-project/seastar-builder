@@ -43,7 +43,7 @@ namespace {
 					return listener.accept().then(
 						[] (seastar::connected_socket s, seastar::socket_address a) {
 							std::cout << "accepted connection from: " << a << std::endl;
-							handle_connection(std::move(s), std::move(a));
+							(void)handle_connection(std::move(s), std::move(a));
 						});
 				});
 			});
