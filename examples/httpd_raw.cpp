@@ -57,15 +57,15 @@ hell9
 			});
 	}
 	
-	void on_accepted(seastar::connected_socket s, seastar::socket_address a) {
+	void on_accepted(seastar::accept_result ar) {
 		thread_local static int count = 0;
 		++count;
 		if (count % 100 == 0) {
 			std::cout << "accepted " << count << " connections" << std::endl;
 		}
 		// std::cout << "accepted connection from: " << a << std::endl;
-		seastar::schedule(seastar::make_task([s=std::move(s), a=std::move(a)] () mutable {
-			(void)handle_connection(std::move(s), std::move(a));
+		seastar::schedule(seastar::make_task([ar=std::move(ar)] () mutable {
+			(void)handle_connection(std::move(ar.connection), std::move(ar.remote_address));
 		}));
 	}
 	

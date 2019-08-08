@@ -40,11 +40,10 @@ namespace {
 			seastar::listen(seastar::make_ipv4_address({port}), lo),
 			[] (auto& listener) {
 				return seastar::keep_doing([&listener] () {
-					return listener.accept().then(
-						[] (seastar::connected_socket s, seastar::socket_address a) {
-							std::cout << "accepted connection from: " << a << std::endl;
-							(void)handle_connection(std::move(s), std::move(a));
-						});
+					return listener.accept().then([] (seastar::accept_result ar) {
+						std::cout << "accepted connection from: " << ar.remote_address << std::endl;
+						(void)handle_connection(std::move(ar.connection), std::move(ar.remote_address));
+					});
 				});
 			});
 	}
