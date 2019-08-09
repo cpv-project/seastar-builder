@@ -1,3 +1,9 @@
+seastar (20190809.1) bionic; urgency=low
+
+  * build from seastar fe2b5b0c6baac6743f860f297ab1548bcf9424c0
+
+ -- compiv <compiv@tutanota.com>  Fri, 09 Aug 2019 20:28:00 +0000
+
 seastar (20190807.1) bionic; urgency=low
 
   * build from seastar 6e5b15b99aa86f368a4cc11d0bfb787203247b8b
