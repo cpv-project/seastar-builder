@@ -1,3 +1,9 @@
+seastar (20191017.1) bionic; urgency=low
+
+  * add patch (mark future::failed as const)
+
+ -- compiv <compiv@tutanota.com>  Thu, 17 Oct 2019 01:02:00 +0000
+
 seastar (20191016.1) bionic; urgency=low
 
   * build from seastar 0daad306994dd71e608377ee5c6d9d3605ead4e0

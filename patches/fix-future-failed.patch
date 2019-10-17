@@ -1,0 +1,11 @@
+--- a/include/seastar/core/future.hh
++++ b/include/seastar/core/future.hh
+@@ -1043,7 +1043,7 @@ class SEASTAR_NODISCARD future : private internal::future_base, internal::warn_v
+     ///
+     /// \return \c true if the future is availble and has failed.
+     [[gnu::always_inline]]
+-    bool failed() noexcept {
++    bool failed() const noexcept {
+         return _state.failed();
+     }
+
